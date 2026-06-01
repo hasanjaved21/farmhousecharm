@@ -1,0 +1,1521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Farmhouse Charm | Coastal Farmhouse Retreat</title>
+  <!-- Google Fonts + Font Awesome 6 -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      tap-highlight-color: transparent;
+    }
+
+    body {
+      --primary-blue: #4476C2;
+      --light-ocean: #5AA7DB;
+      --sunset-orange: #F2A112;
+      --palm-dark: #1E171D;
+      --white: #FFFFFF;
+      --light-bg: #F7F9FC;
+      --dark-bg-testimonial: #0B2B4A;
+      
+      font-family: 'Inter', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--palm-dark);
+      scroll-behavior: smooth;
+      overflow-x: hidden;
+    }
+
+    a, button, .btn-cta, .nav-links a, .mobile-nav-links a, .logo-area, 
+    .gallery-item, .special-card, .nav-arrow, .dot, .whatsapp-float,
+    .menu-icon, .close-menu, .social-links-footer a, .mobile-social a,
+    .location-card, .contact-btn {
+      -webkit-tap-highlight-color: transparent;
+      tap-highlight-color: transparent;
+      outline: none;
+    }
+
+    ::selection {
+      background: var(--sunset-orange);
+      color: var(--white);
+    }
+
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(28px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes gentleZoom {
+      0% { opacity: 0; transform: scale(0.96); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes popupFadeIn {
+      0% { opacity: 0; transform: scale(0.9) translateY(20px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .animate-fade-up {
+      animation: fadeInUp 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+      opacity: 0;
+    }
+
+    .animate-zoom {
+      animation: gentleZoom 0.85s ease forwards;
+      opacity: 0;
+    }
+
+    .delay-100 { animation-delay: 0.1s; }
+    .delay-200 { animation-delay: 0.2s; }
+    .delay-300 { animation-delay: 0.3s; }
+    .delay-400 { animation-delay: 0.4s; }
+
+    /* Popup Overlay Styles */
+    .popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .popup-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .popup-container {
+      background: linear-gradient(145deg, #fff 0%, #faf7f2 100%);
+      max-width: 420px;
+      width: 90%;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.3);
+      animation: popupFadeIn 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1) forwards;
+      border: 3px solid var(--white);
+    }
+    
+    .popup-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    .popup-content {
+      padding: 1.5rem;
+      text-align: center;
+    }
+    
+    .popup-content h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+    
+    .popup-content p {
+      font-size: 0.95rem;
+      color: #6b5a48;
+      margin-bottom: 1.5rem;
+      line-height: 1.4;
+    }
+    
+    .popup-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    
+    .popup-book-btn {
+      background: var(--sunset-orange);
+      color: var(--palm-dark);
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    
+    .popup-book-btn:hover {
+      background: var(--primary-blue);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    }
+    
+    .popup-close-btn {
+      background: transparent;
+      border: 2px solid #ddd;
+      color: #888;
+      padding: 0.8rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    
+    .popup-close-btn:hover {
+      border-color: var(--sunset-orange);
+      color: var(--sunset-orange);
+      transform: translateY(-2px);
+    }
+    
+    .popup-x-btn {
+      position: absolute;
+      top: 12px;
+      right: 16px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #333;
+      transition: all 0.2s;
+      z-index: 10;
+      border: 1px solid #eee;
+    }
+    
+    .popup-x-btn:hover {
+      background: var(--sunset-orange);
+      color: white;
+      transform: scale(1.05);
+    }
+    
+    .popup-image-wrapper {
+      position: relative;
+    }
+
+    /* Navigation Bar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.9rem 2rem;
+      background: rgba(255, 255, 255, 0.94);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 2px solid rgba(90, 167, 219, 0.25);
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    
+    .logo-img {
+      height: 52px;
+      width: auto;
+      max-width: 180px;
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+      transition: transform 0.2s ease;
+    }
+    
+    .logo-img:hover {
+      transform: scale(1.02);
+    }
+    
+    .site-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary-blue), var(--light-ocean));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.2px;
+      white-space: nowrap;
+    }
+    
+    .logo-area:hover .site-name {
+      background: linear-gradient(135deg, var(--sunset-orange), var(--primary-blue));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+    
+    .logo-text-fallback {
+      display: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--primary-blue), var(--light-ocean));
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.3rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 550;
+      color: var(--palm-dark);
+      transition: all 0.25s;
+      font-size: 1rem;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      width: 0%;
+      height: 2.8px;
+      background: var(--sunset-orange);
+      transition: width 0.3s ease;
+      border-radius: 4px;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary-blue);
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .menu-icon {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+      color: var(--primary-blue);
+      z-index: 1002;
+    }
+
+    /* Mobile Slide-in Menu */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.4);
+      z-index: 1100;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .mobile-menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: -280px;
+      width: 280px;
+      height: 100%;
+      background: linear-gradient(145deg, var(--white) 0%, #faf7f2 100%);
+      z-index: 1101;
+      transition: left 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      padding: 2rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      border-right: 3px solid var(--sunset-orange);
+      box-shadow: none;
+    }
+    
+    .mobile-menu.open {
+      left: 0;
+    }
+    
+    .mobile-menu-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 2.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(68, 118, 194, 0.2);
+    }
+    
+    .mobile-menu-header img {
+      height: 45px;
+      width: auto;
+    }
+    
+    .mobile-menu-header span {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--primary-blue);
+    }
+    
+    .close-menu {
+      margin-left: auto;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--palm-dark);
+      transition: 0.2s;
+    }
+    
+    .close-menu:hover {
+      color: var(--sunset-orange);
+      transform: scale(1.1);
+    }
+    
+    .mobile-nav-links {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    
+    .mobile-nav-links li {
+      margin-bottom: 1.5rem;
+    }
+    
+    .mobile-nav-links a {
+      text-decoration: none;
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--palm-dark);
+      transition: 0.2s;
+      display: block;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+    
+    .mobile-nav-links a:hover {
+      color: var(--primary-blue);
+      transform: translateX(5px);
+      border-bottom-color: var(--sunset-orange);
+    }
+    
+    .mobile-social {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+    }
+    
+    .mobile-social a {
+      color: var(--primary-blue);
+      font-size: 1.6rem;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+    
+    .mobile-social a:hover {
+      color: var(--sunset-orange);
+      transform: translateY(-3px);
+    }
+
+    /* Hero Section */
+    .hero-section {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(125deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%), 
+                  url('https://images.pexels.com/photos/258154/pexels-photo-258154.jpeg?auto=compress&cs=tinysrgb&w=1600') center/cover no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      border-bottom: 3px solid var(--sunset-orange);
+    }
+    
+    .hero-overlay {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      padding: 1rem;
+      background: transparent;
+      backdrop-filter: none;
+      border-radius: 0;
+      box-shadow: none;
+      border: none;
+    }
+
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 4rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.5px;
+      text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+    }
+
+    .hero-content .tagline {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--light-ocean);
+      margin-bottom: 1.5rem;
+      border-bottom: 2px solid var(--sunset-orange);
+      display: inline-block;
+      padding-bottom: 0.5rem;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+    }
+
+    .hero-content p {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.92);
+      margin-bottom: 2rem;
+      font-weight: 400;
+      max-width: 650px;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+    }
+
+    .btn-cta {
+      display: inline-block;
+      background: var(--sunset-orange);
+      padding: 0.9rem 2.3rem;
+      border-radius: 60px;
+      color: var(--palm-dark);
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s;
+      box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+      border: none;
+      cursor: pointer;
+    }
+    .btn-cta:hover {
+      background: var(--white);
+      transform: translateY(-4px);
+      color: var(--primary-blue);
+      box-shadow: 0 12px 22px rgba(0,0,0,0.25);
+    }
+
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background-color: #25D366;
+      color: white;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: all 0.3s ease;
+      z-index: 1050;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      animation: gentleZoom 0.5s ease;
+    }
+    
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+      background-color: #128C7E;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 3.5rem 2rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem;
+      text-align: center;
+      margin-bottom: 2.8rem;
+      color: var(--primary-blue);
+      position: relative;
+      width: 100%;
+    }
+    .section-title:after {
+      content: '';
+      display: block;
+      width: 80px;
+      height: 3px;
+      background: var(--sunset-orange);
+      margin: 0.7rem auto 0;
+      border-radius: 6px;
+    }
+
+    /* Who Are We Section - Full Width */
+    .about-fullwidth {
+      width: 100%;
+      position: relative;
+      background: url('https://i.postimg.cc/ZYw7hhJJ/image.png') center/cover no-repeat;
+      background-attachment: scroll;
+      margin: 2rem 0;
+      border-radius: 0;
+    }
+    .about-overlay {
+      background: rgba(247, 249, 252, 0.88);
+      backdrop-filter: blur(1px);
+      padding: 3.5rem 2rem;
+      width: 100%;
+    }
+    .who-we-are {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 3rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .who-text {
+      flex: 1;
+      min-width: 280px;
+    }
+    .who-text h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      color: var(--primary-blue);
+      margin-bottom: 1.2rem;
+    }
+    .who-text p {
+      font-size: 1rem;
+      line-height: 1.7;
+      color: #4a4a4a;
+      margin-bottom: 1rem;
+    }
+    .who-text .signature {
+      margin-top: 1.5rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      color: var(--sunset-orange);
+      font-style: italic;
+    }
+    .who-image {
+      flex: 1;
+      min-width: 280px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+      transition: transform 0.3s ease;
+    }
+    .who-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .who-image:hover {
+      transform: translateY(-5px);
+    }
+    .who-image:hover img {
+      transform: scale(1.03);
+    }
+
+    /* Locations Section */
+    .locations-section {
+      background: linear-gradient(135deg, #f8f4ee 0%, #fff 100%);
+      border-radius: 48px;
+      padding: 2rem;
+      margin: 2rem 0;
+    }
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .location-card {
+      background: var(--white);
+      border-radius: 28px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(90, 167, 219, 0.2);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+    }
+    .location-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--sunset-orange);
+      box-shadow: 0 15px 30px -10px rgba(0,0,0,0.1);
+    }
+    .location-icon {
+      font-size: 2rem;
+      color: var(--sunset-orange);
+      margin-bottom: 0.8rem;
+    }
+    .location-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--primary-blue);
+      margin-bottom: 0.5rem;
+    }
+    .location-card p {
+      font-size: 0.85rem;
+      color: #6b6b6b;
+    }
+
+    /* Statistics Counter Section */
+    .stats-section {
+      background: linear-gradient(135deg, var(--primary-blue) 0%, var(--light-ocean) 100%);
+      padding: 3.5rem 2rem;
+      margin: 1rem 0 2rem;
+      border-radius: 48px;
+    }
+    .stats-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 2rem;
+      text-align: center;
+    }
+    .stat-item {
+      flex: 1;
+      min-width: 160px;
+      color: var(--white);
+    }
+    .stat-number {
+      font-size: 3.2rem;
+      font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    .stat-label {
+      font-size: 1rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      opacity: 0.9;
+    }
+
+    /* Our Special Packages Section */
+    .specials-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+      margin-top: 1rem;
+    }
+    .special-card {
+      flex: 1;
+      min-width: 320px;
+      max-width: 500px;
+      border-radius: 32px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.15);
+      transition: all 0.4s ease;
+      background: var(--white);
+    }
+    .special-card img {
+      width: 100%;
+      height: auto;
+      min-height: 320px;
+      object-fit: contain;
+      background: #f5f0e8;
+      transition: transform 0.5s ease, filter 0.3s ease;
+      display: block;
+    }
+    .special-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.25);
+    }
+    .special-card:hover img {
+      transform: scale(1.02);
+      filter: brightness(0.98);
+    }
+    .special-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      color: white;
+      padding: 1.8rem 1.5rem 1.2rem;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      text-align: center;
+    }
+    .special-card:hover .special-overlay {
+      transform: translateY(0);
+    }
+    .special-overlay h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      color: var(--sunset-orange);
+    }
+    .special-overlay p {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    /* Video Section */
+    .video-section-wrapper {
+      width: 100%;
+      margin: 2rem 0;
+      position: relative;
+      background-color: #f8f4ee;
+      overflow-x: hidden;
+    }
+    
+    .video-section {
+      position: relative;
+      width: 100%;
+      padding: 3rem 1rem;
+      background: rgba(0,0,0,0.02);
+      border-radius: 0;
+    }
+    
+    .video-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.postimg.cc/50BKNDbJ/image.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.4;
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    .video-container {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.2);
+      background: #000;
+      aspect-ratio: 9 / 16;
+      z-index: 1;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      object-fit: cover;
+    }
+    .video-caption {
+      position: relative;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: var(--primary-blue);
+      font-weight: 500;
+      z-index: 1;
+      background: rgba(255,255,255,0.6);
+      display: inline-block;
+      width: auto;
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      backdrop-filter: blur(2px);
+    }
+    .caption-wrapper {
+      text-align: center;
+      z-index: 1;
+      position: relative;
+    }
+
+    /* Gallery */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      justify-content: center;
+      margin: 2rem 0 1rem;
+    }
+    .gallery-item {
+      flex: 1 1 280px;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 15px 25px rgba(0, 0, 0, 0.07);
+      transition: all 0.4s;
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 270px;
+      object-fit: cover;
+      transition: transform 0.5s ease, filter 0.3s ease;
+      display: block;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.08);
+      filter: brightness(0.75);
+    }
+    
+    .gallery-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+      color: white;
+      padding: 1.5rem 1rem 0.8rem;
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+      font-family: 'Playfair Display', serif;
+    }
+    
+    .gallery-item:hover .gallery-overlay {
+      transform: translateY(0);
+    }
+    
+    .gallery-overlay span {
+      display: inline-block;
+      background: rgba(242, 161, 18, 0.85);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      color: var(--palm-dark);
+      font-weight: 600;
+    }
+
+    /* Testimonial Carousel */
+    .testimonials-section {
+      background-color: var(--dark-bg-testimonial);
+      padding: 4rem 1.5rem;
+      margin: 2rem 0;
+      position: relative;
+    }
+    .testimonials-container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .testimonials-heading {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .testimonials-subhead {
+      text-align: center;
+      color: rgba(255,255,255,0.75);
+      font-size: 1.1rem;
+      margin-bottom: 3rem;
+      border-bottom: 2px solid var(--sunset-orange);
+      display: inline-block;
+      width: auto;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 0.5rem;
+    }
+    .carousel-wrapper {
+      position: relative;
+      overflow: hidden;
+      border-radius: 40px;
+    }
+    .testimonial-carousel {
+      display: flex;
+      transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .testimonial-slide {
+      flex: 0 0 100%;
+      padding: 1rem;
+    }
+    .testimonial-card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(4px);
+      border-radius: 36px;
+      padding: 2rem 1.8rem;
+      text-align: center;
+      border: 1px solid rgba(90, 167, 219, 0.3);
+    }
+    .quote-icon {
+      font-size: 2rem;
+      color: var(--sunset-orange);
+      opacity: 0.7;
+      margin-bottom: 1rem;
+    }
+    .testimonial-text {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #f0f4fa;
+      font-style: italic;
+      margin-bottom: 1.5rem;
+    }
+    .client-name {
+      font-weight: 700;
+      color: var(--sunset-orange);
+      font-size: 1rem;
+    }
+    .star-rating {
+      margin-top: 0.8rem;
+      color: var(--sunset-orange);
+    }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 2rem;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .dot.active {
+      background-color: var(--sunset-orange);
+      width: 28px;
+      border-radius: 10px;
+    }
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1.8rem;
+    }
+    .nav-arrow {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--white);
+    }
+    .nav-arrow:hover {
+      background: var(--sunset-orange);
+      color: var(--palm-dark);
+    }
+
+    /* Enhanced Contact Section */
+    .contact-enhanced {
+      background: linear-gradient(145deg, var(--white) 0%, #f5f0ea 100%);
+      border-radius: 48px;
+      padding: 2.5rem;
+      text-align: center;
+      border: 1px solid rgba(68,118,194,0.15);
+      box-shadow: 0 15px 35px -10px rgba(0,0,0,0.08);
+    }
+    .contact-icon-circle {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, var(--primary-blue), var(--light-ocean));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.2rem;
+    }
+    .contact-icon-circle i {
+      font-size: 2.2rem;
+      color: var(--white);
+    }
+    .contact-enhanced h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--primary-blue);
+      margin-bottom: 1rem;
+    }
+    .contact-details {
+      margin: 1.5rem 0;
+    }
+    .contact-details p {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin: 0.6rem 1rem;
+      font-size: 1rem;
+      background: rgba(68,118,194,0.08);
+      padding: 0.6rem 1.2rem;
+      border-radius: 60px;
+    }
+    .contact-details i {
+      color: var(--sunset-orange);
+      font-size: 1.1rem;
+    }
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: white;
+      padding: 0.9rem 2rem;
+      border-radius: 60px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.25s;
+      margin-top: 0.5rem;
+      border: none;
+      cursor: pointer;
+    }
+    .contact-btn:hover {
+      background: #128C7E;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--palm-dark);
+      color: #e0dfe3;
+      padding: 3rem 1.5rem 1.5rem;
+      border-top: 4px solid var(--sunset-orange);
+      margin-top: 2rem;
+    }
+    .footer-grid {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+    .footer-col h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      margin-bottom: 1.2rem;
+      color: var(--sunset-orange);
+      position: relative;
+      display: inline-block;
+    }
+    .footer-col p {
+      line-height: 1.6;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-bottom: 1rem;
+    }
+    .footer-col .quick-links {
+      list-style: none;
+    }
+    .footer-col .quick-links li {
+      margin-bottom: 0.6rem;
+    }
+    .footer-col .quick-links a {
+      color: #cfd8e6;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.2s;
+    }
+    .footer-col .quick-links a:hover {
+      color: var(--sunset-orange);
+      padding-left: 5px;
+    }
+    .footer-col .contact-info {
+      list-style: none;
+    }
+    .footer-col .contact-info li {
+      margin-bottom: 0.8rem;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .footer-col .contact-info i {
+      width: 22px;
+      color: var(--sunset-orange);
+      margin-top: 2px;
+    }
+    .social-links-footer {
+      margin-top: 1rem;
+    }
+    .social-links-footer a {
+      color: #cfd8e6;
+      font-size: 1.3rem;
+      margin-right: 1rem;
+      transition: 0.2s;
+      display: inline-block;
+    }
+    .social-links-footer a:hover {
+      color: var(--sunset-orange);
+      transform: translateY(-3px);
+    }
+    .footer-bottom {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255,255,255,0.15);
+      font-size: 0.75rem;
+      opacity: 0.7;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 780px) {
+      .navbar {
+        padding: 0.8rem 1.2rem;
+      }
+      .nav-links {
+        display: none;
+      }
+      .menu-icon {
+        display: block;
+      }
+      .site-name {
+        font-size: 1.2rem;
+        white-space: normal;
+      }
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+      .hero-content .tagline {
+        font-size: 1.1rem;
+      }
+      .hero-content p {
+        font-size: 0.95rem;
+      }
+      .container {
+        padding: 2rem 1.2rem;
+      }
+      .section-title {
+        font-size: 1.9rem;
+      }
+      .about-overlay {
+        padding: 2rem 1.2rem;
+      }
+      .who-we-are {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .who-text {
+        order: 2;
+      }
+      .who-image {
+        order: 1;
+      }
+      .locations-section {
+        padding: 1.5rem;
+      }
+      .contact-enhanced {
+        padding: 1.5rem;
+      }
+      .contact-details p {
+        margin: 0.5rem;
+        font-size: 0.85rem;
+      }
+      .stats-section {
+        padding: 2rem 1rem;
+      }
+      .stat-number {
+        font-size: 2.2rem;
+      }
+      .popup-container {
+        width: 95%;
+      }
+      .popup-content h3 {
+        font-size: 1.3rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Popup Overlay -->
+<div class="popup-overlay" id="offerPopup">
+  <div class="popup-container">
+    <div class="popup-image-wrapper">
+      <img class="popup-image" src="https://i.postimg.cc/9X4jCQq6/image.png" alt="Signature Harvest Package">
+      <div class="popup-x-btn" id="closePopupBtn"><i class="fas fa-times"></i></div>
+    </div>
+    <div class="popup-content">
+      <h3>Signature Harvest Package</h3>
+      <p>Farm-to-table dining • Private cottage • Sunset bonfire</p>
+      <div class="popup-buttons">
+        <a href="https://wa.me/923161065792" class="popup-book-btn" target="_blank"><i class="fab fa-whatsapp"></i> Book Now</a>
+        <button class="popup-close-btn" id="closePopupBtn2">Maybe Later</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nav class="navbar">
+  <a href="#home" class="logo-area">
+    <img class="logo-img" src="https://i.postimg.cc/BvDVCF3Q/image.png" alt="Farmhouse Charm Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-block';">
+    <span class="logo-text-fallback">Farmhouse Charm</span>
+    <span class="site-name">Farmhouse Charm</span>
+  </a>
+  <div class="menu-icon" id="menuToggle">
+    <i class="fas fa-bars"></i>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#locations">Locations</a></li>
+    <li><a href="#specials">Packages</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Visit Us</a></li>
+  </ul>
+</nav>
+
+<!-- Mobile Slide-in Menu -->
+<div class="mobile-menu-overlay" id="mobileOverlay"></div>
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-header">
+    <img src="https://i.postimg.cc/BvDVCF3Q/image.png" alt="Logo" onerror="this.style.display='none'">
+    <span>Farmhouse Charm</span>
+    <div class="close-menu" id="closeMenuBtn"><i class="fas fa-times"></i></div>
+  </div>
+  <ul class="mobile-nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#locations">Locations</a></li>
+    <li><a href="#specials">Packages</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#contact">Visit Us</a></li>
+  </ul>
+  <div class="mobile-social">
+    <a href="https://www.facebook.com/p/Farmhouse-Charm-61568744334453/" target="_blank"><i class="fab fa-facebook-f"></i></a>
+    <a href="https://wa.me/923161065792" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    <a href="https://www.instagram.com/farm_housecharm" target="_blank"><i class="fab fa-instagram"></i></a>
+  </div>
+</div>
+
+<a href="https://wa.me/923161065792" class="whatsapp-float" target="_blank"><i class="fab fa-whatsapp"></i></a>
+
+<!-- Hero Section -->
+<section id="home" class="hero-section">
+  <div class="hero-overlay">
+    <div class="hero-content animate-zoom">
+      <h1 class="animate-fade-up">Farmhouse Charm</h1>
+      <div class="tagline animate-fade-up delay-100">where ocean breeze meets rustic grace</div>
+      <p class="animate-fade-up delay-200">Discover a sanctuary of handcrafted comfort, golden sunsets, and the scent of wild lavender.</p>
+      <a href="#about" class="btn-cta animate-fade-up delay-300">Explore the Journey <i class="fas fa-feather-alt"></i></a>
+    </div>
+  </div>
+</section>
+
+<main>
+  <!-- Who Are We Section -->
+  <div id="about">
+    <div class="about-fullwidth reveal">
+      <div class="about-overlay">
+        <div class="who-we-are">
+          <div class="who-text">
+            <h3>Welcome to Farmhouse Charm</h3>
+            <p>Nestled along the serene coastline, Farmhouse Charm is more than just a retreat — it's a heartfelt tribute to rustic elegance and the simple joys of country living. Our journey began with a passion for creating a sanctuary where guests could escape the noise of city life and reconnect with nature, family, and themselves.</p>
+            <p>Every corner of our farmhouse tells a story: from the handcrafted wooden beams to the organic gardens that supply our farm-to-table kitchen. We believe in hospitality that feels like home, experiences that linger in memory, and spaces that nurture the soul.</p>
+            <p>Whether you're here for a peaceful weekend, a celebratory gathering, or a creative workshop, our dedicated team ensures every detail reflects warmth, authenticity, and charm. Come stay with us — and leave with a piece of countryside magic in your heart.</p>
+            <div class="signature">— The Farmhouse Charm Family</div>
+          </div>
+          <div class="who-image">
+            <img src="https://i.postimg.cc/FzH9qQNr/image.png" alt="Farmhouse Charm Estate" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Locations Guide Section -->
+  <div class="container" id="locations">
+    <h2 class="section-title reveal">Our Farmhouse Locations</h2>
+    <div class="locations-section reveal">
+      <div class="locations-grid">
+        <div class="location-card"><div class="location-icon"><i class="fas fa-map-marker-alt"></i></div><h3>Gadap</h3><p>Spacious farmhouses with lush green surroundings, perfect for family gatherings and outdoor events.</p></div>
+        <div class="location-card"><div class="location-icon"><i class="fas fa-tree"></i></div><h3>Malir</h3><p>Scenic views and peaceful environment, ideal for weekend getaways and nature lovers.</p></div>
+        <div class="location-card"><div class="location-icon"><i class="fas fa-road"></i></div><h3>Northern Bypass</h3><p>Easily accessible luxury farmhouses with modern amenities and stunning sunset views.</p></div>
+        <div class="location-card"><div class="location-icon"><i class="fas fa-users"></i></div><h3>Memon Goth</h3><p>Traditional farmhouse experience with expansive lawns, perfect for weddings and large celebrations.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Statistics Counter Section -->
+  <div class="stats-section reveal">
+    <div class="stats-container">
+      <div class="stat-item"><div class="stat-number" id="clientsCount">0</div><div class="stat-label">Happy Clients</div></div>
+      <div class="stat-item"><div class="stat-number" id="projectsCount">0</div><div class="stat-label">Events Hosted</div></div>
+      <div class="stat-item"><div class="stat-number" id="yearsCount">0</div><div class="stat-label">Years of Excellence</div></div>
+    </div>
+  </div>
+
+  <!-- Our Special Packages Section -->
+  <div class="container" id="specials">
+    <h2 class="section-title reveal">Our Special Packages</h2>
+    <div class="specials-grid">
+      <div class="special-card reveal delay-100">
+        <img src="https://i.postimg.cc/9X4jCQq6/image.png" alt="Luxury Farmhouse Package" loading="lazy">
+        <div class="special-overlay"><h3>Signature Harvest Package</h3><p>Farm-to-table dining • Private cottage • Sunset bonfire</p></div>
+      </div>
+      <div class="special-card reveal delay-200">
+        <img src="https://i.postimg.cc/jdP0n3cS/image.png" alt="Relaxation Package" loading="lazy">
+        <div class="special-overlay"><h3>Sunset Retreat Package</h3><p>Lagoon access • Wellness workshop • Starlit dinner</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Video Section -->
+  <div class="video-section-wrapper">
+    <div class="video-section reveal">
+      <div class="video-container"><iframe src="https://drive.google.com/file/d/1GGsRRgCTtIQW4bxwgupMmEKshPkK9T5u/preview" allow="autoplay" allowfullscreen></iframe></div>
+      <div class="caption-wrapper"><div class="video-caption"><i class="fas fa-play-circle" style="color: var(--sunset-orange);"></i> Experience the magic of Farmhouse Charm — watch our story</div></div>
+    </div>
+  </div>
+
+  <!-- Gallery Section -->
+  <div class="container" id="gallery">
+    <h2 class="section-title reveal">Visual Diary</h2>
+    <div class="gallery">
+      <div class="gallery-item reveal delay-100"><img src="https://i.postimg.cc/s2dDkZ28/image.png" alt="Outdoor sitting"><div class="gallery-overlay"><span>Outdoor Sitting</span></div></div>
+      <div class="gallery-item reveal delay-200"><img src="https://i.postimg.cc/MGmxgPNX/image.png" alt="Garden"><div class="gallery-overlay"><span>Garden</span></div></div>
+      <div class="gallery-item reveal delay-300"><img src="https://i.postimg.cc/T24G8W7Q/image.png" alt="Bedroom"><div class="gallery-overlay"><span>Comfortable Bedrooms</span></div></div>
+      <div class="gallery-item reveal delay-400"><img src="https://i.postimg.cc/mr8JQ0Kw/image.png" alt="Building"><div class="gallery-overlay"><span>Beautiful Building</span></div></div>
+      <div class="gallery-item reveal delay-100"><img src="https://images.pexels.com/photos/1643384/pexels-photo-1643384.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Kitchen"><div class="gallery-overlay"><span>Luxury Kitchens</span></div></div>
+    </div>
+  </div>
+
+  <!-- Testimonial Carousel -->
+  <div class="testimonials-section reveal">
+    <div class="testimonials-container">
+      <h2 class="testimonials-heading">Guest Memories</h2>
+      <div style="text-align: center;"><div class="testimonials-subhead">heartfelt words from our visitors</div></div>
+      <div class="carousel-wrapper">
+        <div class="testimonial-carousel" id="testimonialCarousel">
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="quote-icon"><i class="fas fa-quote-left"></i></div><p class="testimonial-text">"Serene escape! The morning mist over the meadows was unforgettable. Pure magic."</p><div class="client-name">Mr. Karim</div><div class="star-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="quote-icon"><i class="fas fa-quote-left"></i></div><p class="testimonial-text">"Cozy cottages, delicious harvest meals, and soulful sunsets. Highly recommend!"</p><div class="client-name">Shakeel Zia</div><div class="star-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="quote-icon"><i class="fas fa-quote-left"></i></div><p class="testimonial-text">"MashaAllah! Bohat achi service hai inki, bohat acha farm tha. Sari cheezein bohat achi thin. MashaAllah sub ne bohat enjoy kia!"</p><div class="client-name">Muhammad Hasnat</div><div class="star-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
+          <div class="testimonial-slide"><div class="testimonial-card"><div class="quote-icon"><i class="fas fa-quote-left"></i></div><p class="testimonial-text">"Karachi's best farm house! Best location, best pool, best games, and wonderful rooms with clean washrooms."</p><div class="client-name">Irshad Ali</div><div class="star-rating"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
+        </div>
+      </div>
+      <div class="carousel-dots" id="carouselDots"></div>
+      <div class="carousel-nav"><div class="nav-arrow" id="prevArrow"><i class="fas fa-chevron-left"></i></div><div class="nav-arrow" id="nextArrow"><i class="fas fa-chevron-right"></i></div></div>
+    </div>
+  </div>
+
+  <!-- Enhanced Contact Section -->
+  <div class="container" id="contact">
+    <div class="contact-enhanced reveal">
+      <div class="contact-icon-circle"><i class="fas fa-phone-alt"></i></div>
+      <h3>Visit Our Farmhouse</h3>
+      <div class="contact-details">
+        <p><i class="fas fa-map-marker-alt"></i> 52/4 Gulbahar no 2, Gulbahar Nazimabad Karachi, Pakistan</p>
+        <p><i class="fas fa-phone-alt"></i> +92 316 1065792</p>
+        <p><i class="fas fa-envelope"></i> hello@farmhousecharm.com</p>
+      </div>
+      <a href="https://wa.me/923161065792" class="contact-btn" target="_blank"><i class="fab fa-whatsapp"></i> Contact Us on WhatsApp</a>
+    </div>
+  </div>
+</main>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col"><h4>Farmhouse Charm</h4><p>Where coastal breeze meets rustic elegance. A sanctuary of handcrafted comfort, organic harvests, and starlit evenings.</p><div class="social-links-footer"><a href="https://www.facebook.com/p/Farmhouse-Charm-61568744334453/" target="_blank"><i class="fab fa-facebook-f"></i></a><a href="https://www.instagram.com/farm_housecharm" target="_blank"><i class="fab fa-instagram"></i></a><a href="https://wa.me/923161065792" target="_blank"><i class="fab fa-whatsapp"></i></a></div></div>
+    <div class="footer-col"><h4>Quick Links</h4><ul class="quick-links"><li><a href="#home">Home</a></li><li><a href="#about">About</a></li><li><a href="#locations">Locations</a></li><li><a href="#specials">Packages</a></li><li><a href="#gallery">Gallery</a></li><li><a href="#contact">Visit Us</a></li></ul></div>
+    <div class="footer-col"><h4>Contact & Address</h4><ul class="contact-info"><li><i class="fas fa-map-marker-alt"></i> 52/4 Gulbahar no 2, Gulbahar Nazimabad Karachi, Pakistan</li><li><i class="fas fa-phone-alt"></i> +92 316 1065792</li><li><i class="fas fa-envelope"></i> hello@farmhousecharm.com</li></ul></div>
+  </div>
+  <div class="footer-bottom">&copy; 2025 Farmhouse Charm — where coastal light meets pastoral heart. All rights reserved.</div>
+</footer>
+
+<script>
+  // Popup functionality - show after 3 seconds
+  const popup = document.getElementById('offerPopup');
+  const closePopupBtns = document.querySelectorAll('#closePopupBtn, #closePopupBtn2');
+  
+  function showPopup() {
+    popup.classList.add('active');
+  }
+  
+  function closePopup() {
+    popup.classList.remove('active');
+  }
+  
+  // Show popup after 3 seconds
+  setTimeout(showPopup, 3000);
+  
+  // Close popup when X button or "Maybe Later" button is clicked
+  closePopupBtns.forEach(btn => {
+    btn.addEventListener('click', closePopup);
+  });
+  
+  // Close popup when clicking outside the popup container
+  popup.addEventListener('click', function(e) {
+    if (e.target === popup) {
+      closePopup();
+    }
+  });
+  
+  // Counter Animation
+  function startCounters() {
+    const clientsEl = document.getElementById('clientsCount'); const projectsEl = document.getElementById('projectsCount'); const yearsEl = document.getElementById('yearsCount');
+    const clientsTarget = 2850, projectsTarget = 520, yearsTarget = 12;
+    let clientsCurrent = 0, projectsCurrent = 0, yearsCurrent = 0;
+    const duration = 2000, stepTime = 20;
+    const clientsStep = clientsTarget / (duration / stepTime), projectsStep = projectsTarget / (duration / stepTime), yearsStep = yearsTarget / (duration / stepTime);
+    const clientsInterval = setInterval(() => { clientsCurrent += clientsStep; if (clientsCurrent >= clientsTarget) { clientsEl.innerText = clientsTarget.toLocaleString() + '+'; clearInterval(clientsInterval); } else { clientsEl.innerText = Math.floor(clientsCurrent).toLocaleString() + '+'; } }, stepTime);
+    const projectsInterval = setInterval(() => { projectsCurrent += projectsStep; if (projectsCurrent >= projectsTarget) { projectsEl.innerText = projectsTarget.toLocaleString() + '+'; clearInterval(projectsInterval); } else { projectsEl.innerText = Math.floor(projectsCurrent).toLocaleString() + '+'; } }, stepTime);
+    const yearsInterval = setInterval(() => { yearsCurrent += yearsStep; if (yearsCurrent >= yearsTarget) { yearsEl.innerText = yearsTarget; clearInterval(yearsInterval); } else { yearsEl.innerText = Math.floor(yearsCurrent); } }, stepTime);
+  }
+  const statsObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { startCounters(); statsObserver.unobserve(entry.target); } }); }, { threshold: 0.3 });
+  const statsSection = document.querySelector('.stats-section'); if (statsSection) statsObserver.observe(statsSection);
+  
+  const carousel = document.getElementById('testimonialCarousel'); const slides = document.querySelectorAll('.testimonial-slide'); const dotsContainer = document.getElementById('carouselDots'); const prevBtn = document.getElementById('prevArrow'); const nextBtn = document.getElementById('nextArrow'); let currentIndex = 0; const totalSlides = slides.length; let autoSlideInterval;
+  function createDots() { dotsContainer.innerHTML = ''; for (let i = 0; i < totalSlides; i++) { const dot = document.createElement('div'); dot.classList.add('dot'); if (i === currentIndex) dot.classList.add('active'); dot.setAttribute('data-index', i); dot.addEventListener('click', (e) => { updateCarousel(parseInt(e.target.getAttribute('data-index'))); resetAutoSlide(); }); dotsContainer.appendChild(dot); } }
+  function updateCarousel(index) { if (index < 0) index = totalSlides - 1; if (index >= totalSlides) index = 0; currentIndex = index; carousel.style.transform = `translateX(-${currentIndex * 100}%)`; const dots = document.querySelectorAll('.dot'); dots.forEach((dot, i) => { dot.classList.toggle('active', i === currentIndex); }); }
+  function nextSlide() { updateCarousel(currentIndex + 1); } function prevSlide() { updateCarousel(currentIndex - 1); } function startAutoSlide() { if (autoSlideInterval) clearInterval(autoSlideInterval); autoSlideInterval = setInterval(nextSlide, 5000); } function resetAutoSlide() { clearInterval(autoSlideInterval); startAutoSlide(); }
+  if (nextBtn && prevBtn) { nextBtn.addEventListener('click', () => { nextSlide(); resetAutoSlide(); }); prevBtn.addEventListener('click', () => { prevSlide(); resetAutoSlide(); }); }
+  const carouselWrapper = document.querySelector('.carousel-wrapper'); if (carouselWrapper) { carouselWrapper.addEventListener('mouseenter', () => clearInterval(autoSlideInterval)); carouselWrapper.addEventListener('mouseleave', startAutoSlide); }
+  createDots(); updateCarousel(0); startAutoSlide();
+  
+  const menuToggleBtn = document.getElementById('menuToggle'); const mobileMenu = document.getElementById('mobileMenu'); const mobileOverlay = document.getElementById('mobileOverlay'); const closeMenuBtn = document.getElementById('closeMenuBtn');
+  function openMobileMenu() { mobileMenu.classList.add('open'); mobileOverlay.classList.add('active'); document.body.style.overflow = 'hidden'; } function closeMobileMenu() { mobileMenu.classList.remove('open'); mobileOverlay.classList.remove('active'); document.body.style.overflow = ''; }
+  menuToggleBtn.addEventListener('click', openMobileMenu); closeMenuBtn.addEventListener('click', closeMobileMenu); mobileOverlay.addEventListener('click', closeMobileMenu); document.querySelectorAll('.mobile-nav-links a').forEach(link => link.addEventListener('click', closeMobileMenu));
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => { anchor.addEventListener('click', function(e) { const targetId = this.getAttribute('href'); if (targetId === "#" || targetId === "") return; const targetElement = document.querySelector(targetId); if (targetElement) { e.preventDefault(); targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' }); closeMobileMenu(); } }); });
+  const revealElements = document.querySelectorAll('.reveal'); const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); observer.unobserve(entry.target); } }); }, { threshold: 0.15 }); revealElements.forEach(el => observer.observe(el));
+  window.addEventListener('load', () => { revealElements.forEach(el => { const rect = el.getBoundingClientRect(); if (rect.top < window.innerHeight - 80) { el.classList.add('active'); observer.unobserve(el); } }); if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) { const hero = document.querySelector('.hero-section'); if (hero) hero.style.backgroundAttachment = 'scroll'; } });
+</script>
+</body>
+</html>
